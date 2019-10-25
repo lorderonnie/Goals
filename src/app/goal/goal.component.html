@@ -1,0 +1,26 @@
+<div class="container" >
+
+    <h1>MY GOALS</h1>
+    <p>My goal for today is to </p>
+    <div class="row">
+      <div class="col-md-6">
+    <ul>
+        <li *ngFor='let goal of goals;let i=index' appStrikethrough>{{goal.name}} , due on {{goal.completeDate|date|uppercase}} >
+           {{goal.id}}
+           <div >          
+          <app-goal-detail [goal]='goal'  *ngIf='goal.showDescription'  (isComplete) = 'deleteGoal($event,i)'></app-goal-detail>
+        </div>
+          <button (click)='toggleDetails(i)'>Toggle Details</button>
+        </li>
+        
+    </ul>
+      </div>
+    <div class="col-md-6">
+        <app-goal-form  (addGoal)="addNewGoal($event)"></app-goal-form>
+    </div>
+    
+    <p *ngIf='goals.length > 5'>Your goals are too many</p>
+    <!-- <app-goal-detail *ngIf='goal.showDescription' [goal]='goal'></app-goal-detail> -->
+
+    </div>
+</div>
